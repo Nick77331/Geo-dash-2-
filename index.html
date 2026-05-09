@@ -1,0 +1,25 @@
+using UnityEngine;
+
+public class PlayerController : MonoBehaviour {
+    public float jumpForce = 10f;
+    private Rigidbody2D rb;
+
+    void Start() {
+        rb = GetComponent<Rigidbody2D>();
+    }
+
+    void Update() {
+        // Detect input for jumping (Space or Click)
+        if (Input.GetButton("Jump") || Input.GetMouseButton(0)) {
+            if (IsGrounded()) {
+                rb.velocity = Vector2.up * jumpForce;
+            }
+        }
+    }
+    
+    // Logic to check if the cube is on the floor
+    bool IsGrounded() {
+        // Simplified check; usually uses a small overlap box at the base
+        return Mathf.Abs(rb.velocity.y) < 0.01f;
+    }
+}
